@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import {loadAllAccounts} from "@/api/account";
 
 export const store = createStore({
     state () {
@@ -19,31 +20,38 @@ export const store = createStore({
         }
     },
     mutations: {
-        setAccessToken(state, access_token) {
+        SET_ACCESS_TOKEN(state, access_token) {
             state.access_token = access_token;
         },
-        setAccounts(state, accounts) {
+        SET_ACCOUNTS(state, accounts) {
             state.accounts = accounts;
         },
-        setDeals(state, deals) {
+        SET_DEALS(state, deals) {
             state.deals = deals;
         },
-        setCurrentAccount(state, currentAccount) {
+        SET_CURRENT_ACCOUNT(state, currentAccount) {
             state.currentAccount = currentAccount;
         },
-        setCurrentDeal(state, currentAccount) {
+        SET_CURRENT_DEAL(state, currentAccount) {
             state.currentAccount = currentAccount;
         },
     },
     actions: {
-        loadAccounts(context) {},
+        loadAccounts({commit}) {
+            loadAllAccounts().then((response) => {
+                commit('SET_ACCOUNTS', response);
+            });
+        },
         loadDeals(context) {},
         createAccount(context, account) {},
-        createDeal(context, deal) {}
+        createDeal(context, deal) {},
+        setAccessToken({commit}, access_token) {
+            commit('SET_ACCESS_TOKEN', access_token);
+        }
     },
     getters: {
         getAccessToken: state => state.access_token,
-        getAccounts: state => state.accounts,
+        getAccounts: state => state.accounts[0],
         getDeals: state => state.deals,
         getCurrentAccount: state => state.currentAccount,
         getCurrentDeal: state => state.currentDeal

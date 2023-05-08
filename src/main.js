@@ -22,6 +22,8 @@ router.beforeEach((to, from, next) => {
                 localStorage.setItem('access_token', token);
             }
         }
+        const token = localStorage.getItem('access_token');
+        store.dispatch('setAccessToken', token);
     }
     next();
 });
