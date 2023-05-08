@@ -1,15 +1,11 @@
-FROM node:16-alpine
-
-RUN apk update && \
-    apk add yarn git
+FROM node:lts-alpine
 
 WORKDIR /app
+
 COPY . .
 
-RUN yarn install
-
-RUN yarn serve
+RUN  npm install
 
 EXPOSE 8080
 
-CMD ["yarn", "serve"]
+CMD ["npm", "run", "serve"]
