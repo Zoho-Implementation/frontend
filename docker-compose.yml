@@ -4,8 +4,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
     ports:
       - "8080:8080"
       - "8081:8081"
     volumes:
       - '.:/app'
+      - "/app/node_modules"
