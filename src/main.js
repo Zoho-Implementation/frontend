@@ -3,10 +3,12 @@ import App from './App.vue'
 import {router} from "@/router";
 import {getAuthLink} from "@/helpers/requestHelper";
 import {getAccessToken} from "@/api/auth";
+import {store} from "@/store";
 
 const app = createApp(App);
 
 app.use(router);
+app.use(store);
 
 router.beforeEach((to, from, next) => {
     const urlParams = new URLSearchParams(window.location.search);
