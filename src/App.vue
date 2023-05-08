@@ -1,13 +1,14 @@
 <template>
   <div id="app">
-    <router-link to="/">Go to Home</router-link>
-    <router-link to="/deal">Deal</router-link>
     <router-view></router-view>
   </div>
 </template>
 
 
 <script>
+
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.js';
 
 export default {
   name: 'App',
