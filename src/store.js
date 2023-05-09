@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import {createAccount, loadAllAccounts} from "@/api/account";
+import {createDeal} from "@/api/deal";
 
 export const store = createStore({
     state () {
@@ -36,25 +37,36 @@ export const store = createStore({
                 commit('SET_ACCESS_TOKEN', response.token)
             });
         },
-        loadDeals(context) {},
+        loadDeals({commit}) {
+
+        },
         createAccount({commit}, account) {
             createAccount(account).then(response => {
                 commit('SET_ACCESS_TOKEN', response.token);
-                commit('SET_ACCOUNT_CREATE_STATUS', true)
+                commit('SET_ACCOUNT_CREATE_STATUS', true);
             })
         },
-        createDeal(context, deal) {},
+        createDeal({commit}, deal) {
+            createDeal(deal).then(response => {
+                console.log(response)
+                commit('SET_ACCESS_TOKEN', response.token);
+                commit('SET_DEAL_CREATE_STATUS', true);
+            })
+        },
         setAccessToken({commit}, access_token) {
             commit('SET_ACCESS_TOKEN', access_token);
         },
         hideAccountSuccessMessage({commit}) {
             commit('SET_ACCOUNT_CREATE_STATUS', false);
+        },
+        hideDealSuccessMessage({commit}) {
+            commit('SET_DEAL_CREATE_STATUS', false);
         }
     },
     getters: {
-        getAccessToken: state => state.access_token,
         getAccounts: state => state.accounts[0],
         getDeals: state => state.deals,
-        getAccountSuccessStatus: state => state.accountCreatedSuccess
+        getAccountSuccessStatus: state => state.accountCreatedSuccess,
+        getDealSuccessStatus: state => state.dealsCreatedSuccess
     }
 })

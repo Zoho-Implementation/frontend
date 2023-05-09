@@ -2,7 +2,6 @@
   <div class="container">
     <HomePageHeader />
     <HomePageMain />
-    <HomePageFooter />
   </div>
 </template>
 
@@ -10,7 +9,6 @@
 
 import HomePageHeader from "@/pages/HomePage/components/HomePageHeader/HomePageHeader.vue";
 import HomePageMain from "@/pages/HomePage/components/HomePageMain/HomePageMain.vue";
-import HomePageFooter from "@/pages/HomePage/components/HomePageFooter/HomePageFooter.vue";
 import { mapActions } from 'vuex';
 
 export default {
@@ -24,7 +22,6 @@ export default {
   components: {
     HomePageHeader,
     HomePageMain,
-    HomePageFooter
   }
 }
 </script>

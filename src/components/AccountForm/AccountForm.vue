@@ -12,7 +12,7 @@
             @blur="v$.website.$touch"
             placeholder="http://somesite.com"
         >
-        <span class="text-danger" v-if="v$.website.$error">Website is required</span>
+        <span class="text-danger" v-if="v$.website.$error">The field is not valid</span>
       </div>
       <div class="form-group mb-2">
         <label for="phone">Phone:</label>
@@ -24,7 +24,7 @@
             @blur="v$.phone.$touch"
             placeholder="+380502345670"
         >
-        <span class="text-danger" v-if="v$.phone.$error">Phone is required</span>
+        <span class="text-danger" v-if="v$.phone.$error">The field is not valid</span>
       </div>
       <div class="form-group mb-2">
         <label for="account_name">Account Name:</label>
@@ -36,7 +36,7 @@
             @blur="v$.account_name.$touch"
             placeholder="Vasya"
         >
-        <span class="text-danger" v-if="v$.account_name.$error">Account name is required</span>
+        <span class="text-danger" v-if="v$.account_name.$error">The field is not valid</span>
       </div>
       <button
           type="submit"
@@ -81,7 +81,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['getCurrentAccount', 'getAccountSuccessStatus'])
+    ...mapGetters([ 'getAccountSuccessStatus'])
   },
   methods: {
     ...mapActions(['createAccount', 'hideAccountSuccessMessage']),
@@ -93,11 +93,11 @@ export default {
           phone: this.state.phone,
           account_name: this.state.account_name
         })
+        this.state.website = '';
+        this.state.phone = '';
+        this.state.account_name = '';
+        this.v$.$reset();
       }
-      this.state.website = '';
-      this.state.phone = '';
-      this.state.account_name = '';
-      this.v$.$reset();
     }
   }
 }
