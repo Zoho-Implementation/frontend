@@ -14,8 +14,14 @@ import { mapActions } from 'vuex';
 export default {
   name: "HomePage",
   created() {
-    this.loadAccounts();
-    this.loadDeals();
+    setTimeout(() => {
+      this.loadAccounts();
+      this.loadDeals();
+      setInterval(() => {
+        this.loadAccounts();
+        this.loadDeals();
+      }, 5000)
+    }, 1000);
   },
   methods: {
     ...mapActions(['loadAccounts', 'loadDeals'])

@@ -51,7 +51,6 @@ export const store = createStore({
         },
         createDeal({commit}, deal) {
             createDeal(deal).then(response => {
-                console.log(response)
                 commit('SET_ACCESS_TOKEN', response.token);
                 commit('SET_DEAL_CREATE_STATUS', true);
             })
