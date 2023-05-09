@@ -1,24 +1,23 @@
 # zoho-integration-frontend
 
-## Project setup
+## Close repository
 ```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn serve
+git clone https://github.com/Zoho-Implementation/frontend.git
 ```
 
-### Compiles and minifies for production
+### Go to the folder with the project
 ```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
+cd frontend
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Сopy .env.example to .env and complete them with variables
+```
+cp .env.example .env
+```
+
+### Execute the command
+```
+docker-compose up -d --build
+```
+
+### Done
