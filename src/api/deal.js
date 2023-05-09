@@ -1,17 +1,17 @@
 import axios from 'axios';
+import {CREATE_DEAL, GET_DEALS} from "@/helpers/api_url";
 import {headers} from "@/helpers/requestHelper";
-import {CREATE_ACCOUNT, GET_ALL_ACCOUNTS} from "@/helpers/api_url";
 
-export const loadAllAccounts = async () => {
+export const loadAllDeals = async () => {
     return await axios({
         method: 'get',
-        url:  process.env.VUE_APP_DOMAIN_API + GET_ALL_ACCOUNTS,
+        url:  process.env.VUE_APP_DOMAIN_API + GET_DEALS,
         headers: headers(),
     })
         .then(response => {
             if (response.data.data[0]) {
                 return {
-                    accounts: response.data.data,
+                    deals: response.data.data,
                     token: response.data.token
                 };
             }
@@ -22,8 +22,8 @@ export const loadAllAccounts = async () => {
 
 };
 
-export const createAccount = async (account) => {
-    return await axios.post(process.env.VUE_APP_DOMAIN_API + CREATE_ACCOUNT, account, {
+export const createDeal = async (deal) => {
+    return await axios.post(process.env.VUE_APP_DOMAIN_API + CREATE_DEAL, deal, {
         headers: headers()
     }).then(response => {
         if (response.data.data) {

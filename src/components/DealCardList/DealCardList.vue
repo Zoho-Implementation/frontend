@@ -3,13 +3,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="mb-2">
-          <Card />
-        </div>
-        <div class="mb-2">
-          <Card />
-        </div>
-        <div class="mb-2">
-          <Card />
+          <span v-for="item in list">
+          <Card :messages="'stage: ' + item.stage" :title="item.deal_name" />
+          </span>
         </div>
       </div>
     </div>
@@ -21,10 +17,13 @@
 import Card from "@/components/Card/Card.vue";
 
 export default {
-  name: "CardList",
+  name: "DealCardList",
+  props: {
+    list: Array
+  },
   components: {
     Card
-  }
+  },
 }
 </script>
 

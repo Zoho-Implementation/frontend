@@ -21,9 +21,15 @@ router.beforeEach((to, from, next) => {
             if (token) {
                 localStorage.setItem('access_token', token);
             }
+            store.dispatch('setAccessToken', token);
+            setTimeout(() => {
+                window.location.href = '/';
+
+            }, 1000);
         }
     }
     next();
+
 });
 
 app.mount('#app');

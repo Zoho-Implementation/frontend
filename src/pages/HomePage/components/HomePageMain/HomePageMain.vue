@@ -11,11 +11,11 @@
     <div class="row">
       <div class="col-md-6">
         <h3>Accounts</h3>
-        <CardList />
+        <AccountCardList :list="getAccounts"/>
       </div>
       <div class="col-md-6">
         <h3>Deals</h3>
-        <CardList />
+        <DealCardList :list="getDeals" />
       </div>
     </div>
   </div>
@@ -24,16 +24,22 @@
 <script>
 
 import AccountForm from "@/components/AccountForm/AccountForm.vue";
-import CardList from "@/components/CardList/CardList.vue";
 import DealForm from "@/components/DealForm/DealForm.vue";
+import { mapGetters } from 'vuex';
+import AccountCardList from "@/components/AccountCardList/AccountCardList.vue";
+import DealCardList from "@/components/DealCardList/DealCardList.vue";
 
 export default {
   name: "HomePageMain",
   components: {
     AccountForm,
-    CardList,
-    DealForm
-  }
+    AccountCardList,
+    DealForm,
+    DealCardList
+  },
+  computed: {
+    ...mapGetters(['getAccounts', 'getDeals'])
+  },
 }
 </script>
 
