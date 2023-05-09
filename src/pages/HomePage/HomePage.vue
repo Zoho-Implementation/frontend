@@ -14,10 +14,11 @@ import { mapActions } from 'vuex';
 export default {
   name: "HomePage",
   created() {
-    this.loadAccounts()
+    this.loadAccounts();
+    this.loadDeals();
   },
   methods: {
-    ...mapActions(['loadAccounts'])
+    ...mapActions(['loadAccounts', 'loadDeals'])
   },
   components: {
     HomePageHeader,

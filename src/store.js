@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 import {createAccount, loadAllAccounts} from "@/api/account";
-import {createDeal} from "@/api/deal";
+import {createDeal, loadAllDeals} from "@/api/deal";
 
 export const store = createStore({
     state () {
@@ -38,7 +38,10 @@ export const store = createStore({
             });
         },
         loadDeals({commit}) {
-
+            loadAllDeals().then((response) => {
+                commit('SET_DEALS', response.deals);
+                commit('SET_ACCESS_TOKEN', response.token)
+            });
         },
         createAccount({commit}, account) {
             createAccount(account).then(response => {
@@ -65,7 +68,7 @@ export const store = createStore({
     },
     getters: {
         getAccounts: state => state.accounts[0],
-        getDeals: state => state.deals,
+        getDeals: state => state.deals[0],
         getAccountSuccessStatus: state => state.accountCreatedSuccess,
         getDealSuccessStatus: state => state.dealsCreatedSuccess
     }
