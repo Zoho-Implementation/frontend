@@ -4,7 +4,7 @@
       <div class="row">
         <div class="mb-2">
           <span v-for="item in list">
-          <Card :messages="'id: ' + item.id" :title="item.account_name" />
+          <Card :messages="'stage: ' + item.stage" :title="item.deal_name" />
           </span>
         </div>
       </div>
@@ -17,7 +17,7 @@
 import Card from "@/components/Card/Card.vue";
 
 export default {
-  name: "CardList",
+  name: "DealCardList",
   props: {
     list: Array
   },
