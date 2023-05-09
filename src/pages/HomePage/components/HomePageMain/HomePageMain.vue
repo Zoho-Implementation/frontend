@@ -11,7 +11,7 @@
     <div class="row">
       <div class="col-md-6">
         <h3>Accounts</h3>
-        <CardList />
+        <CardList :list="getAccounts"/>
       </div>
       <div class="col-md-6">
         <h3>Deals</h3>
@@ -26,6 +26,7 @@
 import AccountForm from "@/components/AccountForm/AccountForm.vue";
 import CardList from "@/components/CardList/CardList.vue";
 import DealForm from "@/components/DealForm/DealForm.vue";
+import { mapGetters } from 'vuex';
 
 export default {
   name: "HomePageMain",
@@ -33,7 +34,10 @@ export default {
     AccountForm,
     CardList,
     DealForm
-  }
+  },
+  computed: {
+    ...mapGetters(['getAccounts'])
+  },
 }
 </script>
 

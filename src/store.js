@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import {createAccount, loadAllAccounts} from "@/api/account";
 
 export const store = createStore({
     state () {
@@ -6,46 +7,54 @@ export const store = createStore({
             access_token: '',
             accounts: [],
             deals: [],
-            currentAccount: {
-                website: '',
-                phone: '',
-                account_name: ''
-            },
-            currentDeal: {
-                account_id: '',
-                deal_name: '',
-                stage: ''
-            }
+            accountCreatedSuccess: false,
+            dealsCreatedSuccess: false,
         }
     },
     mutations: {
-        setAccessToken(state, access_token) {
+        SET_ACCESS_TOKEN(state, access_token) {
             state.access_token = access_token;
+            localStorage.setItem('access_token', access_token);
         },
-        setAccounts(state, accounts) {
+        SET_ACCOUNTS(state, accounts) {
             state.accounts = accounts;
         },
-        setDeals(state, deals) {
+        SET_DEALS(state, deals) {
             state.deals = deals;
         },
-        setCurrentAccount(state, currentAccount) {
-            state.currentAccount = currentAccount;
+        SET_ACCOUNT_CREATE_STATUS(state, status) {
+            state.accountCreatedSuccess = status;
         },
-        setCurrentDeal(state, currentAccount) {
-            state.currentAccount = currentAccount;
+        SET_DEAL_CREATE_STATUS(state, status) {
+            state.dealsCreatedSuccess = status;
         },
     },
     actions: {
-        loadAccounts(context) {},
+        loadAccounts({commit}) {
+            loadAllAccounts().then((response) => {
+                commit('SET_ACCOUNTS', response.accounts);
+                commit('SET_ACCESS_TOKEN', response.token)
+            });
+        },
         loadDeals(context) {},
-        createAccount(context, account) {},
-        createDeal(context, deal) {}
+        createAccount({commit}, account) {
+            createAccount(account).then(response => {
+                commit('SET_ACCESS_TOKEN', response.token);
+                commit('SET_ACCOUNT_CREATE_STATUS', true)
+            })
+        },
+        createDeal(context, deal) {},
+        setAccessToken({commit}, access_token) {
+            commit('SET_ACCESS_TOKEN', access_token);
+        },
+        hideAccountSuccessMessage({commit}) {
+            commit('SET_ACCOUNT_CREATE_STATUS', false);
+        }
     },
     getters: {
         getAccessToken: state => state.access_token,
-        getAccounts: state => state.accounts,
+        getAccounts: state => state.accounts[0],
         getDeals: state => state.deals,
-        getCurrentAccount: state => state.currentAccount,
-        getCurrentDeal: state => state.currentDeal
+        getAccountSuccessStatus: state => state.accountCreatedSuccess
     }
 })
